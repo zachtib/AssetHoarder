@@ -23,7 +23,7 @@ class UuidSerializationTestCase {
         assertNotNull(uuid)
 
         val expected = "\"$UUID_STRING\""
-        val actual = Json.encodeToString(UUIDSerializer, uuid)
+        val actual = Json.encodeToString(UUIDStringSerializer, uuid)
         assertEquals(expected, actual)
     }
 
