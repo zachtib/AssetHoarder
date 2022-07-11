@@ -12,7 +12,7 @@ private fun <R> ByteArray.buffer(block: ByteBuffer.() -> R): R {
 }
 
 @JvmInline
-value class JvmUUID(private val value: java.util.UUID) : UUID {
+private value class JvmUUID(private val value: java.util.UUID) : UUID {
     override val uuidString: String
         get() = value.toString()
 
