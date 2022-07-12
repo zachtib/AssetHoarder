@@ -1,5 +1,7 @@
 package com.zachtib.assets.lib
 
-interface Closeable {
-    fun close()
+import java.io.Closeable as JavaCloseable
+
+interface Closeable : JavaCloseable {
+    override fun close()
 }
