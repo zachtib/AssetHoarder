@@ -1,5 +1,7 @@
 package com.zachtib.assets.lib.state
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -13,6 +15,18 @@ inline fun <reified T : Any> StateHandle.getOrSet(key: String, defaultValue: () 
             set(key, value)
             value
         }
+    }
+}
+
+inline fun <reified T : Any> StateHandle.state(key: String, default: T): MutableState<T> {
+    val wrapped = mutableStateOf(getOrSet(key) { default })
+    return object : MutableState<T> by wrapped {
+        override var value: T
+            get() = wrapped.value
+            set(value) {
+                set(key, value)
+                wrapped.value = value
+            }
     }
 }
 

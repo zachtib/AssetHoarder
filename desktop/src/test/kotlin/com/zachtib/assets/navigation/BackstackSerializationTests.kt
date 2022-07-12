@@ -22,7 +22,7 @@ class BackstackSerializationTests {
         val backstack = Backstack(home = HomeScreenKey)
         backstack.push(key = ProfileScreenKey(profileId = 12345))
 
-        with(backstack.top) {
+        with(backstack.current.value) {
             state["name"] = "John Doe"
         }
 
@@ -41,7 +41,7 @@ class BackstackSerializationTests {
 
         assertNotNull(backstack)
         assertEquals(2, backstack.contents.size)
-        with(backstack.top) {
+        with(backstack.current.value) {
             assertEquals(ProfileScreenKey(profileId = 12345), key)
             assertEquals("John Doe", state["name"])
         }

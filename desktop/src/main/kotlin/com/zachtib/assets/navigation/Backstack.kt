@@ -1,6 +1,9 @@
 package com.zachtib.assets.navigation
 
 import com.zachtib.assets.lib.state.StateHandle
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
@@ -18,6 +21,21 @@ class Backstack internal constructor(
     initialBackstack: List<BackstackEntry>,
 ) : BackstackScope {
 
+    private val backstackEntries: MutableList<BackstackEntry>
+
+    private val mutableCurrentEntryStateFlow: MutableStateFlow<BackstackEntry>
+
+    val current: StateFlow<BackstackEntry>
+        get() = mutableCurrentEntryStateFlow.asStateFlow()
+
+    init {
+        require(initialBackstack.isNotEmpty()) {
+            "Can't initialize a Backstack with no ScreenKeys"
+        }
+        backstackEntries = initialBackstack.toMutableList()
+        mutableCurrentEntryStateFlow = MutableStateFlow(backstackEntries.last())
+    }
+
     companion object {
         private fun createBackstackEntry(key: ScreenKey): BackstackEntry {
             return BackstackEntry(
@@ -29,20 +47,22 @@ class Backstack internal constructor(
 
     constructor(home: ScreenKey) : this(listOf(createBackstackEntry(home)))
 
-    private val backstackEntries = initialBackstack.toMutableList()
-
     internal val contents: List<BackstackEntry> get() = backstackEntries.toList()
 
-    internal val top: BackstackEntry get() = backstackEntries.last()
+    private fun emitTopEntry() {
+        mutableCurrentEntryStateFlow.value = backstackEntries.last()
+    }
 
     override fun push(key: ScreenKey) {
         backstackEntries.add(createBackstackEntry(key))
+        emitTopEntry()
     }
 
     override fun pop() {
         if (backstackEntries.size > 1) {
             val removed = backstackEntries.removeLast()
             removed.close()
+            emitTopEntry()
         }
     }
 }
