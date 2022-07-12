@@ -1,5 +1,9 @@
 package com.zachtib.assets.lib.state
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.serialization.Serializable
 
 @Serializable(with = StateHandleSerializer::class)
@@ -15,6 +19,7 @@ class StateHandle(
 
     @PublishedApi
     internal fun setWrappedValue(key: String, wrapped: Value) {
+        sharedFlows[key]?.tryEmit(wrapped)
         values[key] = wrapped
     }
 
@@ -24,21 +29,32 @@ class StateHandle(
     }
 
     inline operator fun <reified T : Any> get(key: String): T? {
-        return when (val wrapped = getWrappedValue(key)) {
-            is IntValue -> wrapped.value as? T
-            is LongValue -> wrapped.value as? T
-            is StringValue -> wrapped.value as? T
-            null -> return null
-        }
+        val wrapped = getWrappedValue(key) ?: return null
+        return wrapped.unwrap()
     }
 
     inline operator fun <reified T : Any> set(key: String, value: T) {
-        val wrapped = when (value) {
-            is Int -> IntValue(value)
-            is Long -> LongValue(value)
-            is String -> StringValue(value)
-            else -> return
-        }
+        val wrapped = wrappedValueOf(value) ?: return
         setWrappedValue(key, wrapped)
+    }
+
+    private val sharedFlows = mutableMapOf<String, MutableSharedFlow<Value>>()
+
+    @PublishedApi
+    internal fun getOrCreateSharedFlow(key: String): SharedFlow<Value> {
+        return sharedFlows.getOrPut(key) {
+            val createdFlow = MutableSharedFlow<Value>(replay = 1)
+            val currentValue = getWrappedValue(key)
+            if (currentValue != null) {
+                createdFlow.tryEmit(currentValue)
+            }
+            createdFlow
+        }
+    }
+
+    inline fun <reified T : Any> getFlow(key: String): Flow<T> {
+        return getOrCreateSharedFlow(key).mapNotNull { wrapped ->
+            wrapped.unwrap()
+        }
     }
 }

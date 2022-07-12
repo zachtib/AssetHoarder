@@ -23,6 +23,7 @@ dependencyResolutionManagement {
             version("coroutines", "1.6.3")
             version("serialization", "1.3.3")
             version("ktlint-gradle", "10.3.0")
+            version("turbine", "0.8.0")
 
             // Gradle Plugins
             plugin("kotlin.jvm", "org.jetbrains.kotlin.jvm")
@@ -44,6 +45,9 @@ dependencyResolutionManagement {
                 .versionRef("coroutines")
             library("kotlinx.coroutines.test", "org.jetbrains.kotlinx", "kotlinx-coroutines-test")
                 .versionRef("coroutines")
+
+            library("turbine", "app.cash.turbine", "turbine")
+                .versionRef("turbine")
         }
     }
 }
