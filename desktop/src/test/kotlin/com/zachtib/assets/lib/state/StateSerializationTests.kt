@@ -26,8 +26,8 @@ class StateSerializationTests {
     @Test
     fun `test serializing a StateHandle with values`() {
         val handle = StateHandle()
-        handle.putString("name", "John Doe")
-        handle.putInt("age", 42)
+        handle["name"] = "John Doe"
+        handle["age"] = 42
 
         val actual = Json.encodeToString(handle)
 
@@ -40,11 +40,11 @@ class StateSerializationTests {
 
         assertNotNull(handle)
 
-        val age = handle.getInt("age")
+        val age: Int? = handle["age"]
         assertNotNull(age)
         assertEquals(42, age)
 
-        val name = handle.getString("name")
+        val name: String? = handle["name"]
         assertNotNull(name)
         assertEquals("John Doe", name)
     }

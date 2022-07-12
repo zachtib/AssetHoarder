@@ -25,7 +25,7 @@ class BackstackEntrySerializationTests {
         val state = StateHandle()
         val entry = BackstackEntry(key, state)
 
-        state.putString("name", "John Doe")
+        state["name"] = "John Doe"
 
         val actual = Json.encodeToString(entry)
         val expected = """{"key":{"type":"profile_screen","profileId":12345},"state":{"name":{"type":"string","value":"John Doe"}}}"""
@@ -49,6 +49,6 @@ class BackstackEntrySerializationTests {
 
         assertNotNull(entry)
         assertEquals(ProfileScreenKey(profileId = 12345), entry.key)
-        assertEquals("John Doe", entry.state.getString("name"))
+        assertEquals("John Doe", entry.state["name"])
     }
 }

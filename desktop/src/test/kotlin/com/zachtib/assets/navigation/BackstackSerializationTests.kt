@@ -23,7 +23,7 @@ class BackstackSerializationTests {
         backstack.push(key = ProfileScreenKey(profileId = 12345))
 
         with(backstack.top) {
-            state.putString("name", "John Doe")
+            state["name"] = "John Doe"
         }
 
         val serialized = Json.encodeToString(backstack)
@@ -43,7 +43,7 @@ class BackstackSerializationTests {
         assertEquals(2, backstack.contents.size)
         with(backstack.top) {
             assertEquals(ProfileScreenKey(profileId = 12345), key)
-            assertEquals("John Doe", state.getString("name"))
+            assertEquals("John Doe", state["name"])
         }
     }
 }

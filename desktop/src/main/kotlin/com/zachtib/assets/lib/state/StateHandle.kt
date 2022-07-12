@@ -1,9 +1,6 @@
 package com.zachtib.assets.lib.state
 
-import com.zachtib.assets.viewmodel.ViewModel
 import kotlinx.serialization.Serializable
-import kotlin.properties.ReadWriteProperty
-import kotlin.reflect.KProperty
 
 @Serializable(with = StateHandleSerializer::class)
 class StateHandle(
@@ -43,47 +40,5 @@ class StateHandle(
             else -> return
         }
         setWrappedValue(key, wrapped)
-    }
-
-    fun putInt(key: String, value: Int) {
-        values[key] = IntValue(value)
-    }
-
-    fun getInt(key: String): Int? {
-        return when (val stateValue = values[key]) {
-            is IntValue -> stateValue.value
-            else -> null
-        }
-    }
-
-    fun putString(key: String, value: String) {
-        values[key] = StringValue(value)
-    }
-
-    fun getString(key: String): String? {
-        return when (val stateValue = values[key]) {
-            is StringValue -> stateValue.value
-            else -> null
-        }
-    }
-}
-
-class TestModel(state: StateHandle) : ViewModel() {
-    var name: String by state.default { "" }
-}
-
-private inline fun <reified T : Any> StateHandle.default(crossinline default: () -> T) = object : ReadWriteProperty<Any, T> {
-    override operator fun setValue(thisRef: Any, property: KProperty<*>, value: T) {
-        set(property.name, value)
-    }
-
-    override operator fun getValue(thisRef: Any, property: KProperty<*>): T {
-        val current: T? = get(property.name)
-        if (current != null) {
-            return current
-        }
-        val newValue: T = default()
-        set(property.name, newValue)
-        return newValue
     }
 }
