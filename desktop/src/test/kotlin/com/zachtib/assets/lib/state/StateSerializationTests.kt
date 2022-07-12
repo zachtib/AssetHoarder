@@ -1,6 +1,5 @@
-package com.zachtib.assets.navigation
+package com.zachtib.assets.lib.state
 
-import com.zachtib.assets.lib.state.StateHandle
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
