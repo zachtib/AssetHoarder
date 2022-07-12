@@ -44,5 +44,6 @@ ktlint {
     // ij_kotlin_packages_to_use_import_on_demand
     //
     // Check: https://github.com/JLLeitschuh/ktlint-gradle/blob/master/plugin/gradle/libs.versions.toml
+    // issue: https://github.com/JLLeitschuh/ktlint-gradle/issues/589
     disabledRules.set(setOf("no-wildcard-imports"))
 }
