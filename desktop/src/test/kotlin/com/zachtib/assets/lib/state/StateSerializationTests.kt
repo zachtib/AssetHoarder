@@ -20,7 +20,7 @@ class StateSerializationTests {
         val stateHandle: StateHandle = Json.decodeFromString("{}")
 
         assertNotNull(stateHandle)
-        assertTrue(stateHandle.map.isEmpty())
+        assertTrue(stateHandle.copyValues().isEmpty())
     }
 
     @Test

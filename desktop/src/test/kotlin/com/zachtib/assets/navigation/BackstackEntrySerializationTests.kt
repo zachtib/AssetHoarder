@@ -39,7 +39,7 @@ class BackstackEntrySerializationTests {
 
         assertNotNull(entry)
         assertEquals(ProfileScreenKey(profileId = 12345), entry.key)
-        assertTrue(entry.state.map.isEmpty())
+        assertTrue(entry.state.copyValues().isEmpty())
     }
 
     @Test

@@ -9,7 +9,7 @@ import kotlinx.serialization.encoding.Encoder
 
 object StateHandleSerializer : KSerializer<StateHandle> {
 
-    private val delegate = MapSerializer(String.serializer(), StateValue.serializer())
+    private val delegate = MapSerializer(String.serializer(), Value.serializer())
 
     override val descriptor: SerialDescriptor
         get() = delegate.descriptor
@@ -19,6 +19,6 @@ object StateHandleSerializer : KSerializer<StateHandle> {
     }
 
     override fun serialize(encoder: Encoder, value: StateHandle) {
-        encoder.encodeSerializableValue(delegate, value.map)
+        encoder.encodeSerializableValue(delegate, value.copyValues())
     }
 }

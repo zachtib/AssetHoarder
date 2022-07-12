@@ -1,70 +1,89 @@
 package com.zachtib.assets.lib.state
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
+import com.zachtib.assets.viewmodel.ViewModel
 import kotlinx.serialization.Serializable
+import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KProperty
 
 @Serializable(with = StateHandleSerializer::class)
 class StateHandle(
-    initialState: Map<String, StateValue> = emptyMap(),
+    initialState: Map<String, Value> = emptyMap(),
 ) {
+    private val values: MutableMap<String, Value> = initialState.toMutableMap()
 
-    private val stateMap: MutableMap<String, StateValue> = initialState.toMutableMap()
+    @PublishedApi
+    internal fun getWrappedValue(key: String): Value? {
+        return values[key]
+    }
 
-    val map: Map<String, StateValue>
-        get() = stateMap.toMap()
+    @PublishedApi
+    internal fun setWrappedValue(key: String, wrapped: Value) {
+        values[key] = wrapped
+    }
+
+    @PublishedApi
+    internal fun copyValues(): Map<String, Value> {
+        return values.toMap()
+    }
+
+    inline operator fun <reified T : Any> get(key: String): T? {
+        return when (val wrapped = getWrappedValue(key)) {
+            is IntValue -> wrapped.value as? T
+            is LongValue -> wrapped.value as? T
+            is StringValue -> wrapped.value as? T
+            null -> return null
+        }
+    }
+
+    inline operator fun <reified T : Any> set(key: String, value: T) {
+        val wrapped = when (value) {
+            is Int -> IntValue(value)
+            is Long -> LongValue(value)
+            is String -> StringValue(value)
+            else -> return
+        }
+        setWrappedValue(key, wrapped)
+    }
 
     fun putInt(key: String, value: Int) {
-        stateMap[key] = StateValue.IntValue(value)
+        values[key] = IntValue(value)
     }
 
     fun getInt(key: String): Int? {
-        return when (val stateValue = stateMap[key]) {
-            is StateValue.IntValue -> stateValue.value
+        return when (val stateValue = values[key]) {
+            is IntValue -> stateValue.value
             else -> null
         }
     }
 
     fun putString(key: String, value: String) {
-        stateMap[key] = StateValue.StringValue(value)
+        values[key] = StringValue(value)
     }
 
     fun getString(key: String): String? {
-        return when (val stateValue = stateMap[key]) {
-            is StateValue.StringValue -> stateValue.value
+        return when (val stateValue = values[key]) {
+            is StringValue -> stateValue.value
             else -> null
         }
     }
+}
 
-    fun string(key: String, initializer: () -> String): MutableState<String> {
-        val current: StateValue.StringValue = when (val stateValue = stateMap[key]) {
-            is StateValue.StringValue -> stateValue
-            else -> {
-                val newStateValue = StateValue.StringValue(initializer())
-                stateMap[key] = newStateValue
-                newStateValue
-            }
-        }
+class TestModel(state: StateHandle) : ViewModel() {
+    var name: String by state.default { "" }
+}
 
-        val wrapped: MutableState<String> = mutableStateOf(current.value)
-        return MutableStateHandle(wrapped) { value ->
-            stateMap[key] = StateValue.StringValue(value)
-        }
+private inline fun <reified T : Any> StateHandle.default(crossinline default: () -> T) = object : ReadWriteProperty<Any, T> {
+    override operator fun setValue(thisRef: Any, property: KProperty<*>, value: T) {
+        set(property.name, value)
     }
 
-    fun int(key: String, initializer: () -> Int): MutableState<Int> {
-        val current: StateValue.IntValue = when (val stateValue = stateMap[key]) {
-            is StateValue.IntValue -> stateValue
-            else -> {
-                val newStateValue = StateValue.IntValue(initializer())
-                stateMap[key] = newStateValue
-                newStateValue
-            }
+    override operator fun getValue(thisRef: Any, property: KProperty<*>): T {
+        val current: T? = get(property.name)
+        if (current != null) {
+            return current
         }
-
-        val wrapped: MutableState<Int> = mutableStateOf(current.value)
-        return MutableStateHandle(wrapped) { value ->
-            stateMap[key] = StateValue.IntValue(value)
-        }
+        val newValue: T = default()
+        set(property.name, newValue)
+        return newValue
     }
 }
