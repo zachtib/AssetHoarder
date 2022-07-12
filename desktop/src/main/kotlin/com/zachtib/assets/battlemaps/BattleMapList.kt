@@ -4,22 +4,19 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import com.zachtib.assets.viewmodel.viewModel
 
 @Composable
 fun BattleMapListView() {
-    val viewModel = viewModel {
-        BattleMapListViewModel(JsonFileBattleMapRepository("battlemaps.json"))
-    }
-    val state by viewModel.state.collectAsState()
-    println(state)
-
-    BattleMapListContent(
-        isLoading = state.isLoading,
-        battleMaps = state.battleMaps,
-    )
+//    val viewModel = viewModel {
+//        BattleMapListViewModel(JsonFileBattleMapRepository("battlemaps.json"))
+//    }
+//    val state by viewModel.state.collectAsState()
+//    println(state)
+//
+//    BattleMapListContent(
+//        isLoading = state.isLoading,
+//        battleMaps = state.battleMaps,
+//    )
 }
 
 @Composable

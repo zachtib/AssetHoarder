@@ -16,7 +16,7 @@ interface BackstackScope {
 @Serializable(with = BackstackSerializer::class)
 class Backstack internal constructor(
     initialBackstack: List<BackstackEntry>,
-): BackstackScope {
+) : BackstackScope {
 
     companion object {
         private fun createBackstackEntry(key: ScreenKey): BackstackEntry {
@@ -47,7 +47,7 @@ class Backstack internal constructor(
     }
 }
 
-object BackstackSerializer: KSerializer<Backstack> {
+object BackstackSerializer : KSerializer<Backstack> {
 
     private val delegate = ListSerializer(BackstackEntry.serializer())
 

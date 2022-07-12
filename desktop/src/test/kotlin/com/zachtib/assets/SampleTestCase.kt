@@ -1,7 +1,6 @@
 package com.zachtib.assets
 
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import kotlin.test.*
 
 class SampleTestCase {
     @Test

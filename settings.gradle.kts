@@ -22,6 +22,7 @@ dependencyResolutionManagement {
             version("compose", "1.1.1")
             version("coroutines", "1.6.3")
             version("serialization", "1.3.3")
+            version("ktlint-gradle", "10.3.0")
 
             // Gradle Plugins
             plugin("kotlin.jvm", "org.jetbrains.kotlin.jvm")
@@ -30,6 +31,8 @@ dependencyResolutionManagement {
                 .versionRef("kotlin")
             plugin("compose", "org.jetbrains.compose")
                 .versionRef("compose")
+            plugin("ktlint", "org.jlleitschuh.gradle.ktlint")
+                .versionRef("ktlint-gradle")
 
             // Libraries
             library("kotlinx.serialization.json", "org.jetbrains.kotlinx", "kotlinx-serialization-json")

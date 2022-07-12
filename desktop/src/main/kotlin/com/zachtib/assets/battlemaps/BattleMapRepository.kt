@@ -23,7 +23,7 @@ interface BattleMapRepository {
 
 class JsonFileBattleMapRepository(
     private val filename: String,
-): BattleMapRepository {
+) : BattleMapRepository {
 
     private var hasLoaded: Boolean = false
 

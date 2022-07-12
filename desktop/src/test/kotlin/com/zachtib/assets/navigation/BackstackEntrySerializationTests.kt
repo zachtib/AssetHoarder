@@ -5,9 +5,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.junit.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 class BackstackEntrySerializationTests {
     @Test
@@ -53,5 +51,4 @@ class BackstackEntrySerializationTests {
         assertEquals(ProfileScreenKey(profileId = 12345), entry.key)
         assertEquals("John Doe", entry.state.getString("name"))
     }
-
 }
