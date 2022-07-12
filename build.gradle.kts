@@ -8,7 +8,7 @@ plugins {
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.compose) apply false
     alias(libs.plugins.kotlinx.serialization) apply false
-    alias(libs.plugins.ktlint)
+    alias(libs.plugins.ktlint) apply false
 }
 
 tasks.create<Delete>("clean") {

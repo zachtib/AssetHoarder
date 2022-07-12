@@ -37,3 +37,7 @@ compose.desktop {
         }
     }
 }
+
+ktlint {
+    disabledRules.set(setOf("no-wildcard-imports"))
+}
