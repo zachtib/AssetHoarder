@@ -39,5 +39,10 @@ compose.desktop {
 }
 
 ktlint {
+    // This rule should be able to be re-enabled once ktlint-gradle supports
+    // ktlint 0.45.0+, which added support for the .editorconfig rule:
+    // ij_kotlin_packages_to_use_import_on_demand
+    //
+    // Check: https://github.com/JLLeitschuh/ktlint-gradle/blob/master/plugin/gradle/libs.versions.toml
     disabledRules.set(setOf("no-wildcard-imports"))
 }
