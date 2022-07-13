@@ -1,4 +1,4 @@
-package com.zachtib.sampleapp
+package com.zachtib.sampleapp.home
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -6,6 +6,9 @@ import com.zachtib.lib.backstack.Navigator
 import com.zachtib.lib.statehandle.StateHandle
 import com.zachtib.lib.statehandle.state
 import com.zachtib.lib.viewmodels.ViewModel
+import com.zachtib.sampleapp.ScreenKey
+import com.zachtib.sampleapp.goToProfile
+import com.zachtib.sampleapp.goToSettings
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -30,28 +33,5 @@ class HomeViewModel(
 
     fun onSettingsPressed() {
         launch { navigator.goToSettings() }
-    }
-}
-
-class ProfileViewModel(
-    private val profileKey: ProfileScreenKey,
-    private val state: StateHandle,
-    private val navigator: Navigator<ScreenKey>,
-) : ViewModel() {
-
-    val message = "Welcome to profile ${profileKey.profileId}"
-
-    fun onGoBackPressed() {
-        launch { navigator.back() }
-    }
-}
-
-class SettingsViewModel(
-    private val state: StateHandle,
-    private val navigator: Navigator<ScreenKey>,
-) : ViewModel() {
-
-    fun onGoBackPressed() {
-        launch { navigator.back() }
     }
 }
