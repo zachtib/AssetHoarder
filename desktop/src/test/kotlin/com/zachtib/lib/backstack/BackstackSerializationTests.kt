@@ -1,8 +1,5 @@
 package com.zachtib.lib.backstack
 
-import com.zachtib.assets.navigation.HomeScreenKey
-import com.zachtib.assets.navigation.ProfileScreenKey
-import com.zachtib.assets.navigation.ScreenKey
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -11,7 +8,7 @@ import kotlin.test.*
 class BackstackSerializationTests {
     @Test
     fun `test serializing a backstack with some elements`() {
-        val backstack = Backstack<ScreenKey>(home = HomeScreenKey)
+        val backstack = Backstack<TestScreenKey>(home = HomeScreenKey)
         backstack.push(key = ProfileScreenKey(profileId = 12345))
 
         val serialized = Json.encodeToString(backstack)
@@ -22,7 +19,7 @@ class BackstackSerializationTests {
 
     @Test
     fun `test serializing a backstack when an element has state`() {
-        val backstack = Backstack<ScreenKey>(home = HomeScreenKey)
+        val backstack = Backstack<TestScreenKey>(home = HomeScreenKey)
         backstack.push(key = ProfileScreenKey(profileId = 12345))
 
         with(backstack.current.value) {
@@ -40,7 +37,7 @@ class BackstackSerializationTests {
         val json =
             """[{"key":{"type":"home_screen"},"state":{}},{"key":{"type":"profile_screen","profileId":12345},"state":{"name":{"type":"string","value":"John Doe"}}}]"""
 
-        val backstack: Backstack<ScreenKey> = Json.decodeFromString(json)
+        val backstack: Backstack<TestScreenKey> = Json.decodeFromString(json)
 
         assertNotNull(backstack)
         assertEquals(2, backstack.contents.size)

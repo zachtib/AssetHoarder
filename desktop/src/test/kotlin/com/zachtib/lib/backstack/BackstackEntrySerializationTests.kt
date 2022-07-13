@@ -1,7 +1,5 @@
 package com.zachtib.lib.backstack
 
-import com.zachtib.assets.navigation.ProfileScreenKey
-import com.zachtib.assets.navigation.ScreenKey
 import com.zachtib.lib.statehandle.StateHandle
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -12,7 +10,7 @@ import kotlin.test.*
 class BackstackEntrySerializationTests {
     @Test
     fun `test serializing a BackstackEntry`() {
-        val key: ScreenKey = ProfileScreenKey(profileId = 12345)
+        val key: TestScreenKey = ProfileScreenKey(profileId = 12345)
         val state = StateHandle()
         val entry = BackstackEntry(key, state)
 
@@ -23,21 +21,22 @@ class BackstackEntrySerializationTests {
 
     @Test
     fun `test serializing a BackstackEntry with state`() {
-        val key = ProfileScreenKey(profileId = 12345)
+        val key: TestScreenKey = ProfileScreenKey(profileId = 12345)
         val state = StateHandle()
-        val entry = BackstackEntry<ScreenKey>(key, state)
+        val entry = BackstackEntry(key, state)
 
         state["name"] = "John Doe"
 
         val actual = Json.encodeToString(entry)
-        val expected = """{"key":{"type":"profile_screen","profileId":12345},"state":{"name":{"type":"string","value":"John Doe"}}}"""
+        val expected =
+            """{"key":{"type":"profile_screen","profileId":12345},"state":{"name":{"type":"string","value":"John Doe"}}}"""
         assertEquals(expected, actual)
     }
 
     @Test
     fun `test deserializing a BackstackEntry`() {
         val json = """{"key":{"type":"profile_screen","profileId":12345},"state":{}}"""
-        val entry: BackstackEntry<ScreenKey> = Json.decodeFromString(json)
+        val entry: BackstackEntry<TestScreenKey> = Json.decodeFromString(json)
 
         assertNotNull(entry)
         assertEquals(ProfileScreenKey(profileId = 12345), entry.key)
@@ -46,8 +45,9 @@ class BackstackEntrySerializationTests {
 
     @Test
     fun `test deserializing a BackstackEntry with state`() {
-        val json = """{"key":{"type":"profile_screen","profileId":12345},"state":{"name":{"type":"string","value":"John Doe"}}}"""
-        val entry: BackstackEntry<ScreenKey> = Json.decodeFromString(json)
+        val json =
+            """{"key":{"type":"profile_screen","profileId":12345},"state":{"name":{"type":"string","value":"John Doe"}}}"""
+        val entry: BackstackEntry<TestScreenKey> = Json.decodeFromString(json)
 
         assertNotNull(entry)
         assertEquals(ProfileScreenKey(profileId = 12345), entry.key)
