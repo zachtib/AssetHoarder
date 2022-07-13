@@ -1,12 +1,7 @@
-package com.zachtib.assets
+package com.zachtib.sampleapp
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import com.zachtib.assets.navigation.ProfileScreenKey
-import com.zachtib.assets.navigation.ScreenKey
-import com.zachtib.assets.navigation.back
-import com.zachtib.assets.navigation.goToProfile
-import com.zachtib.assets.navigation.goToSettings
 import com.zachtib.lib.backstack.Navigator
 import com.zachtib.lib.statehandle.StateHandle
 import com.zachtib.lib.statehandle.state

@@ -55,3 +55,4 @@ dependencyResolutionManagement {
 rootProject.name = "AssetHoarder"
 
 include(":desktop")
+include(":sampleapp")
