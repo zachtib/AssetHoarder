@@ -16,9 +16,9 @@ import com.zachtib.assets.navigation.ProfileScreenKey
 import com.zachtib.assets.navigation.ScreenKey
 import com.zachtib.assets.navigation.SettingsScreenKey
 import com.zachtib.assets.navigation.createNavigator
-import com.zachtib.assets.navigation.viewModel
 import com.zachtib.lib.backstack.Backstack
 import com.zachtib.lib.backstack.BackstackEntry
+import com.zachtib.lib.viewModel
 
 @Composable
 fun App() {

@@ -1,4 +1,4 @@
-package com.zachtib.assets.navigation
+package com.zachtib.lib
 
 import com.zachtib.lib.backstack.BackstackEntry
 import com.zachtib.lib.viewmodels.ViewModel
