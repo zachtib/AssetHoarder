@@ -1,4 +1,4 @@
-package com.zachtib.assets.lib.state
+package com.zachtib.lib.statehandle
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

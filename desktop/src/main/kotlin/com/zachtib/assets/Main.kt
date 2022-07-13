@@ -11,13 +11,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import com.zachtib.assets.navigation.HomeScreenKey
-import com.zachtib.assets.navigation.Navigator
 import com.zachtib.assets.navigation.ProfileScreenKey
 import com.zachtib.assets.navigation.ScreenKey
 import com.zachtib.assets.navigation.SettingsScreenKey
-import com.zachtib.assets.navigation.createNavigator
 import com.zachtib.lib.backstack.Backstack
 import com.zachtib.lib.backstack.BackstackEntry
+import com.zachtib.lib.backstack.Navigator
+import com.zachtib.lib.backstack.createNavigator
 import com.zachtib.lib.viewModel
 
 @Composable

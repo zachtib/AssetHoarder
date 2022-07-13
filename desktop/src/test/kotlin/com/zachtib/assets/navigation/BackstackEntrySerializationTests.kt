@@ -1,7 +1,7 @@
 package com.zachtib.assets.navigation
 
-import com.zachtib.assets.lib.state.StateHandle
 import com.zachtib.lib.backstack.BackstackEntry
+import com.zachtib.lib.statehandle.StateHandle
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json

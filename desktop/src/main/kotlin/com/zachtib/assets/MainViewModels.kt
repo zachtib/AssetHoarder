@@ -2,11 +2,11 @@ package com.zachtib.assets
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import com.zachtib.assets.lib.state.StateHandle
-import com.zachtib.assets.lib.state.state
-import com.zachtib.assets.navigation.Navigator
 import com.zachtib.assets.navigation.ProfileScreenKey
 import com.zachtib.assets.navigation.ScreenKey
+import com.zachtib.lib.backstack.Navigator
+import com.zachtib.lib.statehandle.StateHandle
+import com.zachtib.lib.statehandle.state
 import com.zachtib.lib.viewmodels.ViewModel
 import kotlinx.coroutines.launch
 

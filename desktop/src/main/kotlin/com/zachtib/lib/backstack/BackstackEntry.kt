@@ -1,9 +1,9 @@
 package com.zachtib.lib.backstack
 
-import com.zachtib.assets.lib.state.StateHandle
 import com.zachtib.lib.closeable.Closeable
 import com.zachtib.lib.closeable.closeAll
 import com.zachtib.lib.closeable.mutableCloseableMapOf
+import com.zachtib.lib.statehandle.StateHandle
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 

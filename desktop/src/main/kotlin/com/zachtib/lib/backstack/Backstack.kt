@@ -1,6 +1,6 @@
 package com.zachtib.lib.backstack
 
-import com.zachtib.assets.lib.state.StateHandle
+import com.zachtib.lib.statehandle.StateHandle
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -1,4 +1,4 @@
-package com.zachtib.assets.lib.state
+package com.zachtib.lib.statehandle
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf

@@ -1,4 +1,4 @@
-package com.zachtib.assets.lib.state
+package com.zachtib.lib.statehandle
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.MapSerializer
