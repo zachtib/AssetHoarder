@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalCoroutinesApi::class)
-
 package com.zachtib.assets.lib.state
 
 import app.cash.turbine.test
@@ -9,6 +7,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runTest
 import kotlin.test.*
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class StateHandleFlowTests {
     @Test
     fun `test a Flow with no value should not emit`() = runTest {

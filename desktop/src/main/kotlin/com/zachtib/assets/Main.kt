@@ -12,10 +12,11 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import com.zachtib.assets.navigation.Backstack
 import com.zachtib.assets.navigation.BackstackEntry
-import com.zachtib.assets.navigation.BackstackScope
 import com.zachtib.assets.navigation.HomeScreenKey
+import com.zachtib.assets.navigation.Navigator
 import com.zachtib.assets.navigation.ProfileScreenKey
 import com.zachtib.assets.navigation.SettingsScreenKey
+import com.zachtib.assets.navigation.createNavigator
 import com.zachtib.assets.navigation.viewModel
 
 @Composable
@@ -23,29 +24,29 @@ fun App() {
     MaterialTheme {
         val backstack = remember { Backstack(HomeScreenKey) }
         val current: BackstackEntry by backstack.current.collectAsState()
-        AppContent(current, backstack)
+        AppContent(current, backstack.createNavigator())
     }
 }
 
 @Composable
 fun AppContent(
     screen: BackstackEntry,
-    navigator: BackstackScope,
+    navigator: Navigator,
 ) {
     when (screen.key) {
         HomeScreenKey -> HomeScreen(
-            viewModel = screen.viewModel { _: HomeScreenKey, stateHandle ->
-                HomeViewModel(stateHandle, navigator)
+            viewModel = screen.viewModel {
+                HomeViewModel(screen.state, navigator)
             }
         )
         is ProfileScreenKey -> ProfileScreen(
-            viewModel = screen.viewModel { key: ProfileScreenKey, stateHandle ->
-                ProfileViewModel(key, stateHandle, navigator)
+            viewModel = screen.viewModel {
+                ProfileViewModel(screen.key, screen.state, navigator)
             }
         )
         SettingsScreenKey -> SettingsScreen(
-            viewModel = screen.viewModel { _: SettingsScreenKey, stateHandle ->
-                SettingsViewModel(stateHandle, navigator)
+            viewModel = screen.viewModel {
+                SettingsViewModel(screen.state, navigator)
             }
         )
     }

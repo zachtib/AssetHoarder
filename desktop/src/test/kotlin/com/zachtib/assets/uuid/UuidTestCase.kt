@@ -82,9 +82,6 @@ class UuidTestCase {
         assertNotNull(uuid1)
         assertNotNull(uuid2)
 
-        println(uuid1.toString())
-        println(uuid2.toString())
-
         assertTrue(uuid1 !== uuid2, "Two separate UUIDs should not be the same reference")
         assertNotEquals(uuid1.hashCode(), uuid2.hashCode())
     }
