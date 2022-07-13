@@ -1,6 +1,7 @@
-package com.zachtib.assets.navigation
+package com.zachtib.lib.backstack
 
-import com.zachtib.lib.backstack.BackstackEntry
+import com.zachtib.assets.navigation.ProfileScreenKey
+import com.zachtib.assets.navigation.ScreenKey
 import com.zachtib.lib.statehandle.StateHandle
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString

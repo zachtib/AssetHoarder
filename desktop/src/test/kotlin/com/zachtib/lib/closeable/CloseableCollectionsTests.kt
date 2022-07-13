@@ -1,8 +1,5 @@
-package com.zachtib.assets.lib
+package com.zachtib.lib.closeable
 
-import com.zachtib.lib.closeable.Closeable
-import com.zachtib.lib.closeable.closeAll
-import com.zachtib.lib.closeable.mutableCloseableMapOf
 import kotlin.test.*
 
 class CloseableCollectionsTests {
