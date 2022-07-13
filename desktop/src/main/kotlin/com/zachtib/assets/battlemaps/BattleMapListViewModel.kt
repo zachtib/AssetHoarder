@@ -1,6 +1,6 @@
 package com.zachtib.assets.battlemaps
 
-import com.zachtib.assets.viewmodel.ViewModel
+import com.zachtib.lib.viewmodels.ViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn

@@ -1,7 +1,9 @@
 package com.zachtib.assets.navigation
 
-fun interface Navigator {
+import com.zachtib.lib.backstack.BackstackScope
+
+fun interface Navigator<K> {
     suspend fun perform(
-        action: BackstackScope.() -> Unit,
+        action: BackstackScope<K>.() -> Unit,
     )
 }

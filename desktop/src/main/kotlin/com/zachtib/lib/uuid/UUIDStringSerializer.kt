@@ -1,4 +1,4 @@
-package com.zachtib.assets.uuid
+package com.zachtib.lib.uuid
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind

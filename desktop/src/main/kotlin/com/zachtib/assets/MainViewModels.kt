@@ -6,12 +6,13 @@ import com.zachtib.assets.lib.state.StateHandle
 import com.zachtib.assets.lib.state.state
 import com.zachtib.assets.navigation.Navigator
 import com.zachtib.assets.navigation.ProfileScreenKey
-import com.zachtib.assets.viewmodel.ViewModel
+import com.zachtib.assets.navigation.ScreenKey
+import com.zachtib.lib.viewmodels.ViewModel
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val state: StateHandle,
-    private val navigator: Navigator,
+    private val navigator: Navigator<ScreenKey>,
 ) : ViewModel() {
 
     var counter: Int by state.state("counter", 0)
@@ -37,7 +38,7 @@ class HomeViewModel(
 class ProfileViewModel(
     private val profileKey: ProfileScreenKey,
     private val state: StateHandle,
-    private val navigator: Navigator,
+    private val navigator: Navigator<ScreenKey>,
 ) : ViewModel() {
 
     val message = "Welcome to profile ${profileKey.profileId}"
@@ -49,7 +50,7 @@ class ProfileViewModel(
 
 class SettingsViewModel(
     private val state: StateHandle,
-    private val navigator: Navigator,
+    private val navigator: Navigator<ScreenKey>,
 ) : ViewModel() {
 
     fun onGoBackPressed() {

@@ -1,4 +1,4 @@
-package com.zachtib.assets.uuid
+package com.zachtib.lib.uuid
 
 import kotlinx.serialization.Serializable
 
@@ -26,7 +26,7 @@ interface UUID {
         operator fun invoke(uuidString: String) = fromString(uuidString)
         operator fun invoke(bytes: ByteArray) = fromByteArray(bytes)
 
-        private val delegate: Platform = JvmUUID.Companion
+        private val delegate: Platform = JvmUUID
 
         override fun randomUUID() = delegate.randomUUID()
         override fun fromString(uuidString: String) = delegate.fromString(uuidString)

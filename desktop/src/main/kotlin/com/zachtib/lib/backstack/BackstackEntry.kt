@@ -1,15 +1,15 @@
-package com.zachtib.assets.navigation
+package com.zachtib.lib.backstack
 
-import com.zachtib.assets.lib.Closeable
-import com.zachtib.assets.lib.closeAll
-import com.zachtib.assets.lib.mutableCloseableMapOf
 import com.zachtib.assets.lib.state.StateHandle
+import com.zachtib.lib.closeable.Closeable
+import com.zachtib.lib.closeable.closeAll
+import com.zachtib.lib.closeable.mutableCloseableMapOf
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
 @Serializable
-class BackstackEntry(
-    val key: ScreenKey,
+class BackstackEntry<K>(
+    val key: K,
     val state: StateHandle,
 ) : Closeable {
 

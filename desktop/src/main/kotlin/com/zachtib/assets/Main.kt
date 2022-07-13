@@ -10,28 +10,29 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import com.zachtib.assets.navigation.Backstack
-import com.zachtib.assets.navigation.BackstackEntry
 import com.zachtib.assets.navigation.HomeScreenKey
 import com.zachtib.assets.navigation.Navigator
 import com.zachtib.assets.navigation.ProfileScreenKey
+import com.zachtib.assets.navigation.ScreenKey
 import com.zachtib.assets.navigation.SettingsScreenKey
 import com.zachtib.assets.navigation.createNavigator
 import com.zachtib.assets.navigation.viewModel
+import com.zachtib.lib.backstack.Backstack
+import com.zachtib.lib.backstack.BackstackEntry
 
 @Composable
 fun App() {
     MaterialTheme {
-        val backstack = remember { Backstack(HomeScreenKey) }
-        val current: BackstackEntry by backstack.current.collectAsState()
+        val backstack = remember { Backstack<ScreenKey>(HomeScreenKey) }
+        val current: BackstackEntry<ScreenKey> by backstack.current.collectAsState()
         AppContent(current, backstack.createNavigator())
     }
 }
 
 @Composable
 fun AppContent(
-    screen: BackstackEntry,
-    navigator: Navigator,
+    screen: BackstackEntry<ScreenKey>,
+    navigator: Navigator<ScreenKey>,
 ) {
     when (screen.key) {
         HomeScreenKey -> HomeScreen(

@@ -1,6 +1,7 @@
 package com.zachtib.assets.navigation
 
 import com.zachtib.assets.lib.state.StateHandle
+import com.zachtib.lib.backstack.BackstackEntry
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -10,7 +11,7 @@ import kotlin.test.*
 class BackstackEntrySerializationTests {
     @Test
     fun `test serializing a BackstackEntry`() {
-        val key = ProfileScreenKey(profileId = 12345)
+        val key: ScreenKey = ProfileScreenKey(profileId = 12345)
         val state = StateHandle()
         val entry = BackstackEntry(key, state)
 
@@ -23,7 +24,7 @@ class BackstackEntrySerializationTests {
     fun `test serializing a BackstackEntry with state`() {
         val key = ProfileScreenKey(profileId = 12345)
         val state = StateHandle()
-        val entry = BackstackEntry(key, state)
+        val entry = BackstackEntry<ScreenKey>(key, state)
 
         state["name"] = "John Doe"
 
@@ -35,7 +36,7 @@ class BackstackEntrySerializationTests {
     @Test
     fun `test deserializing a BackstackEntry`() {
         val json = """{"key":{"type":"profile_screen","profileId":12345},"state":{}}"""
-        val entry: BackstackEntry = Json.decodeFromString(json)
+        val entry: BackstackEntry<ScreenKey> = Json.decodeFromString(json)
 
         assertNotNull(entry)
         assertEquals(ProfileScreenKey(profileId = 12345), entry.key)
@@ -45,7 +46,7 @@ class BackstackEntrySerializationTests {
     @Test
     fun `test deserializing a BackstackEntry with state`() {
         val json = """{"key":{"type":"profile_screen","profileId":12345},"state":{"name":{"type":"string","value":"John Doe"}}}"""
-        val entry: BackstackEntry = Json.decodeFromString(json)
+        val entry: BackstackEntry<ScreenKey> = Json.decodeFromString(json)
 
         assertNotNull(entry)
         assertEquals(ProfileScreenKey(profileId = 12345), entry.key)

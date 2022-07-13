@@ -1,4 +1,4 @@
-package com.zachtib.assets.uuid
+package com.zachtib.lib.uuid
 
 import java.nio.BufferUnderflowException
 import java.nio.ByteBuffer

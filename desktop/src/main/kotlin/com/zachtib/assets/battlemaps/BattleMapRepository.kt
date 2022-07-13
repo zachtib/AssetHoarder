@@ -1,6 +1,6 @@
 package com.zachtib.assets.battlemaps
 
-import com.zachtib.assets.uuid.UUID
+import com.zachtib.lib.uuid.UUID
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString

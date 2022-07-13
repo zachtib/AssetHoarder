@@ -1,4 +1,4 @@
-package com.zachtib.assets.lib
+package com.zachtib.lib.closeable
 
 import java.io.Closeable as JavaCloseable
 

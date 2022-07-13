@@ -1,5 +1,6 @@
 package com.zachtib.assets.uuid
 
+import com.zachtib.lib.uuid.UUID
 import kotlin.test.*
 
 class UuidTestCase {

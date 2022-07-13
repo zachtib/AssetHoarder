@@ -1,12 +1,13 @@
 package com.zachtib.assets.navigation
 
-import com.zachtib.assets.viewmodel.ViewModel
+import com.zachtib.lib.backstack.BackstackEntry
+import com.zachtib.lib.viewmodels.ViewModel
 import kotlin.reflect.KClass
 
 private const val DEFAULT_VIEWMODEL_KEY = "com.zachtib.assets.navigation.ViewModel"
 
 @PublishedApi
-internal fun <VM : ViewModel> BackstackEntry.viewModel(
+internal fun <VM : ViewModel> BackstackEntry<*>.viewModel(
     key: String?,
     vmClass: KClass<VM>,
     initializer: () -> VM,
@@ -25,7 +26,7 @@ internal fun <VM : ViewModel> BackstackEntry.viewModel(
     return createdViewModel
 }
 
-inline fun <reified VM : ViewModel> BackstackEntry.viewModel(
+inline fun <reified VM : ViewModel> BackstackEntry<*>.viewModel(
     key: String? = null,
     noinline initializer: () -> VM,
 ): VM = viewModel(key, VM::class, initializer)

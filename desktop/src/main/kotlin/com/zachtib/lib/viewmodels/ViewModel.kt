@@ -1,6 +1,6 @@
-package com.zachtib.assets.viewmodel
+package com.zachtib.lib.viewmodels
 
-import com.zachtib.assets.lib.Closeable
+import com.zachtib.lib.closeable.Closeable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

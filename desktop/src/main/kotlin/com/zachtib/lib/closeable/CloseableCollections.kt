@@ -1,4 +1,4 @@
-package com.zachtib.assets.lib
+package com.zachtib.lib.closeable
 
 fun <K, V : Closeable> Map<K, V>.closeAll() {
     for (closeable in values) {
