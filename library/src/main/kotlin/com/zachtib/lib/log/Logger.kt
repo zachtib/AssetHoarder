@@ -2,6 +2,8 @@ package com.zachtib.lib.log
 
 interface Logger {
 
+    val level: Level get() = Level.DEBUG
+
     fun log(level: Level, tag: String, message: String, throwable: Throwable?)
 
     fun log(level: Level, tag: String, message: String) {
