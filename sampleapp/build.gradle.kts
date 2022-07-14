@@ -10,7 +10,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":desktop"))
+    implementation(projects.library)
 
     implementation(kotlin("stdlib-jdk8"))
     implementation(compose.desktop.currentOs)

@@ -1,3 +1,5 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     repositories {
         google()
@@ -55,4 +57,5 @@ dependencyResolutionManagement {
 rootProject.name = "AssetHoarder"
 
 include(":desktop")
+include(":library")
 include(":sampleapp")

@@ -13,6 +13,8 @@ plugins {
 }
 
 dependencies {
+    implementation(projects.library)
+
     implementation(kotlin("stdlib-jdk8"))
     implementation(compose.desktop.currentOs)
     implementation(libs.kotlinx.serialization.json)
