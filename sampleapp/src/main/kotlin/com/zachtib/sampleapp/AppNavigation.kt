@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import com.zachtib.lib.backstack.Backstack
 import com.zachtib.lib.backstack.BackstackEntry
 import com.zachtib.lib.backstack.Navigator
+import com.zachtib.lib.log.log
 import com.zachtib.lib.viewModel
 import com.zachtib.sampleapp.home.HomeScreen
 import com.zachtib.sampleapp.home.HomeViewModel
@@ -11,6 +12,8 @@ import com.zachtib.sampleapp.profile.ProfileScreen
 import com.zachtib.sampleapp.profile.ProfileViewModel
 import com.zachtib.sampleapp.settings.SettingsScreen
 import com.zachtib.sampleapp.settings.SettingsViewModel
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 typealias AppBackstack = Backstack<ScreenKey>
 typealias AppBackstackEntry = BackstackEntry<ScreenKey>
@@ -21,6 +24,7 @@ fun AppNavigation(
     screen: AppBackstackEntry,
     navigator: AppNavigator,
 ) {
+    log { "Screen: " +  Json.encodeToString(screen) }
     when (val key = screen.key) {
         HomeScreenKey -> HomeScreen(
             viewModel = screen.viewModel {

@@ -25,6 +25,7 @@ dependencyResolutionManagement {
             version("compose", "1.1.1")
             version("coroutines", "1.6.3")
             version("serialization", "1.3.3")
+            version("datetime", "0.4.0")
             version("ktlint-gradle", "10.3.0")
             version("turbine", "0.8.0")
             version("koin", "3.2.0")
@@ -52,6 +53,9 @@ dependencyResolutionManagement {
                 .versionRef("coroutines")
             library("kotlinx.coroutines.test", "org.jetbrains.kotlinx", "kotlinx-coroutines-test")
                 .versionRef("coroutines")
+
+            library("kotlinx.datetime", "org.jetbrains.kotlinx", "kotlinx-datetime")
+                .versionRef("datetime")
 
             library("koin.core", "io.insert-koin", "koin-core")
                 .versionRef("koin")

@@ -15,6 +15,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.swing)
+    implementation(libs.kotlinx.datetime)
 
     implementation(libs.koin.core)
 
